@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simplibs-types"
+version = "0.1.0"
+description = "Named, reusable validated types — ready-made presets built on simplibs-rules."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+keywords = [
+    "validation",
+    "validated-types",
+    "type-hints",
+    "annotated",
+    "presets",
+    "data-validation",
+    "simplibs",
+    "simplibs-types",
+    "developer-tools",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "simplibs-rules>=0.2.2",
+    "simplibs-exception>=1.1.3",
+    "simplibs-validate>=0.2.1",
+]
+
+[[project.authors]]
+name = "Dalibor Sova (Sudip2708)"
+email = "daliborsova@seznam.cz"
+
+[project.urls]
+Homepage = "https://github.com/simplibs/simplibs-types"
+Repository = "https://github.com/simplibs/simplibs-types"
+Issues = "https://github.com/simplibs/simplibs-types/issues"
+Changelog = "https://github.com/simplibs/simplibs-types/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v"
+
+[tool.setuptools.packages.find]
+where = ["src"]
