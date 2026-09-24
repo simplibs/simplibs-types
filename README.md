@@ -166,9 +166,6 @@ as a parameter, field, or variable annotation.
 **Raises:** `ParamError` if no rules are given, or if any rule is neither a `Rule`
 instance nor callable.
 
-➡️ Full reference, including the design rationale for `*rules` and the `Annotated[type_,
-*rules]` vs `Annotated[(type_, *rules)]` distinction: [README_VALIDATED_TYPE](https://github.com/simplibs/simplibs-types/blob/main/docs/README_VALIDATED_TYPE.md)
-
 ---
 
 ## 📖 Preset Catalog
@@ -268,8 +265,8 @@ zero, parity, ranges, and special float states (NaN, infinity).
 | `number_finite`          | Finite number (int or float).                      | —                                 |
 | `number_in_range`        | Number within an inclusive range.                  | `min_val, max_val: Any`           |
 
-➡️ [Full reference — integers (README_TYPES_INT)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_INT.md)
-➡️ [Full reference — floats & numbers (README_TYPES_FLOAT)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_FLOAT.md)
+➡️ [Full reference — integers (README_TYPES_INT)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_INT.md)  
+➡️ [Full reference — floats & numbers (README_TYPES_FLOAT)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_FLOAT.md)  
 
 ### 3. Boolean
 
@@ -278,7 +275,7 @@ zero, parity, ranges, and special float states (NaN, infinity).
 | `bool_true`  | Boolean that must be `True`. | —          |
 | `bool_false` | Boolean that must be `False`.| —          |
 
-➡️ [Full reference (README_TYPES_BOOL)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_BOOL.md)
+➡️ [Full reference (README_TYPES_BOOL)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_BOOL.md)  
 
 ### 4. String
 
@@ -319,7 +316,7 @@ length, and value restriction.
 | `str_matches`       | String fully matching a regex pattern.                 | `pattern: str`                       |
 | `str_one_of`        | String restricted to a fixed set of allowed values.    | `*options: str`                      |
 
-➡️ [Full reference (README_TYPES_STRING)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_STRING.md)
+➡️ [Full reference (README_TYPES_STRING)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_STRING.md)  
 
 ### 5. Bytes
 
@@ -332,7 +329,7 @@ length, and value restriction.
 | `bytes_max_length`   | Bytes with a maximum length.               | `max_length: int`                  |
 | `bytes_length_range` | Bytes with a length in an inclusive range. | `min_length: int, max_length: int` |
 
-➡️ [Full reference (README_TYPES_BYTES)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_BYTES.md)
+➡️ [Full reference (README_TYPES_BYTES)](https://github.com/simplibs/simplibs-types/blob/main/docs/README_TYPES_BYTES.md)  
 
 ---
 
