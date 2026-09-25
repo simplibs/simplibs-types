@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_identifier
 
 
-str_identifier = validated_type(str, is_identifier)
+str_identifier = Annotated[str, is_identifier]
 """Validated type for a string that is a valid Python identifier.
 
 Init Params:

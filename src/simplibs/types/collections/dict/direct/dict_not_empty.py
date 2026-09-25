@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import not_empty
 
 
-dict_not_empty = validated_type(dict, not_empty)
+dict_not_empty = Annotated[dict, not_empty]
 """Validated type for a non-empty dictionary.
 
 Init Params:

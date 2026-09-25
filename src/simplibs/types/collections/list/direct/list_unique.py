@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import all_unique
 
 
-list_unique = validated_type(list, all_unique)
+list_unique = Annotated[list, all_unique]
 """Validated type for a list whose items are all unique.
 
 Init Params:

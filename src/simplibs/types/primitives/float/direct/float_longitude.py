@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-float_longitude = validated_type(float, in_range(-180.0, 180.0))
+float_longitude = Annotated[float, in_range(-180.0, 180.0)]
 """Validated type for a float representing a geographic longitude.
 
 Init Params:

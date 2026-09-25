@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_finite
 
 
-int_float_finite = validated_type(int | float, is_finite)
+int_float_finite = Annotated[int | float, is_finite]
 """Validated type for a finite number (int or float, neither NaN nor
 infinite).
 

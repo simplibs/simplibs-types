@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import not_blank
 
 
-str_not_blank = validated_type(str, not_blank)
+str_not_blank = Annotated[str, not_blank]
 """Validated type for a string that is neither empty nor whitespace-only.
 
 Init Params:

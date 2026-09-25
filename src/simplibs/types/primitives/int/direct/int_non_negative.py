@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import greater_or_equal
 
 
-int_non_negative = validated_type(int, greater_or_equal(0))
+int_non_negative = Annotated[int, greater_or_equal(0)]
 """Validated type for a non-negative integer (zero or positive).
 
 Init Params:

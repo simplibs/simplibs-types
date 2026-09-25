@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-int_month = validated_type(int, in_range(1, 12))
+int_month = Annotated[int, in_range(1, 12)]
 """Validated type for an integer representing a calendar month.
 
 Init Params:

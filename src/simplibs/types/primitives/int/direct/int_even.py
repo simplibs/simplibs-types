@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_even
 
 
-int_even = validated_type(int, is_even)
+int_even = Annotated[int, is_even]
 """Validated type for an even integer.
 
 Init Params:

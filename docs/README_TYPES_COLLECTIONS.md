@@ -199,7 +199,7 @@ Validated type for a list whose every item satisfies a given rule.
 `item_rule` is applied to each item individually (see `for_each`) — if validation
 fails for a single item, validation of the whole list fails. `item_rule` itself may
 be an arbitrarily composed rule (e.g. via `&`, `|`, `~`), including another
-`validated_type` used as a nested annotation.
+`validated type` used as a nested annotation.
 
 **Example usage:**
 ```python
@@ -321,7 +321,7 @@ Validated type for a set whose every item satisfies a given rule.
 `item_rule` is applied to each item individually (see `for_each`) — if validation
 fails for a single item, validation of the whole set fails. `item_rule` itself may
 be an arbitrarily composed rule (e.g. via `&`, `|`, `~`), including another
-`validated_type` used as a nested annotation. Note that, unlike `list`/`tuple`, set
+`validated type` used as a nested annotation. Note that, unlike `list`/`tuple`, set
 items have no defined order.
 
 **Example usage:**
@@ -444,7 +444,7 @@ Validated type for a tuple whose every item satisfies a given rule.
 `item_rule` is applied to each item individually (see `for_each`) — if validation
 fails for a single item, validation of the whole tuple fails. `item_rule` itself may
 be an arbitrarily composed rule (e.g. via `&`, `|`, `~`), including another
-`validated_type` used as a nested annotation. This applies `item_rule` uniformly to
+`validated type` used as a nested annotation. This applies `item_rule` uniformly to
 every position; it does not validate fixed-position tuples of mixed types (e.g.
 `tuple[int, str]`) element-by-element.
 

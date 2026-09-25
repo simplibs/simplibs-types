@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import has_length
 
 
@@ -20,4 +20,4 @@ def set_max_length(max_length: int) -> Any:
         @validate_call
         def process(items: SmallSet): ...
     """
-    return validated_type(set, has_length(max_length=max_length))
+    return Annotated[set, has_length(max_length=max_length)]

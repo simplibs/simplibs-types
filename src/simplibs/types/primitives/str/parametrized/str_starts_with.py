@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import starts_with
 
 
@@ -19,4 +19,4 @@ def str_starts_with(prefix: str) -> Any:
         @validate_call
         def process(value: HttpsUrl): ...
     """
-    return validated_type(str, starts_with(prefix))
+    return Annotated[str, starts_with(prefix)]

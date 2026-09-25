@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import greater_or_equal
 
 
@@ -19,4 +19,4 @@ def float_ge(threshold: float) -> Any:
         @validate_call
         def process(value: AtLeastZero): ...
     """
-    return validated_type(float, greater_or_equal(threshold))
+    return Annotated[float, greater_or_equal(threshold)]

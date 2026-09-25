@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_alnum
 
 
-str_alnum = validated_type(str, is_alnum)
+str_alnum = Annotated[str, is_alnum]
 """Validated type for a string consisting entirely of alphanumeric
 characters.
 

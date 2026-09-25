@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import ends_with
 
 
@@ -19,4 +19,4 @@ def str_ends_with(suffix: str) -> Any:
         @validate_call
         def process(value: PdfFilename): ...
     """
-    return validated_type(str, ends_with(suffix))
+    return Annotated[str, ends_with(suffix)]

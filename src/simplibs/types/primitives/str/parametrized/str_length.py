@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import has_length
 
 
@@ -20,4 +20,4 @@ def str_length(exact: int) -> Any:
         @validate_call
         def process(value: FourChars): ...
     """
-    return validated_type(str, has_length(exact))
+    return Annotated[str, has_length(exact)]

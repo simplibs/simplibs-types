@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import contains
 
 
@@ -20,4 +20,4 @@ def str_contains(substring: str) -> Any:
         @validate_call
         def process(value: MustMentionError): ...
     """
-    return validated_type(str, contains(substring))
+    return Annotated[str, contains(substring)]

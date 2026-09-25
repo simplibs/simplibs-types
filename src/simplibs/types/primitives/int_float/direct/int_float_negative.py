@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import less_than
 
 
-int_float_negative = validated_type(int | float, less_than(0))
+int_float_negative = Annotated[int | float, less_than(0)]
 """Validated type for a negative number (int or float, strictly less
 than zero).
 

@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import greater_than, is_even
 
 
-int_positive_even = validated_type(int, greater_than(0) & is_even)
+int_positive_even = Annotated[int, greater_than(0) & is_even]
 """Validated type for a positive, even integer.
 
 Init Params:

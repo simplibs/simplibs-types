@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import equals
 
 
@@ -19,4 +19,4 @@ def int_eq(expected: int) -> Any:
         @validate_call
         def process(value: MustBeSeven): ...
     """
-    return validated_type(int, equals(expected))
+    return Annotated[int, equals(expected)]

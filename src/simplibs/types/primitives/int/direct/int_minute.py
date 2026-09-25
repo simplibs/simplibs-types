@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-int_minute = validated_type(int, in_range(0, 59))
+int_minute = Annotated[int, in_range(0, 59)]
 """Validated type for an integer representing a minute.
 
 Init Params:

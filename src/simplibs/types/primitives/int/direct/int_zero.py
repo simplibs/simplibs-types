@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_zero
 
 
-int_zero = validated_type(int, is_zero)
+int_zero = Annotated[int, is_zero]
 """Validated type for an integer equal to zero.
 
 Init Params:

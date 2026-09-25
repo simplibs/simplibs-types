@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_in
 
 
@@ -20,4 +20,4 @@ def str_one_of(*options: str) -> Any:
         @validate_call
         def process(value: Status): ...
     """
-    return validated_type(str, is_in(options))
+    return Annotated[str, is_in(options)]

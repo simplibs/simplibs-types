@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_digit_string
 
 
-str_digit = validated_type(str, is_digit_string)
+str_digit = Annotated[str, is_digit_string]
 """Validated type for a string consisting entirely of digit characters.
 
 Init Params:

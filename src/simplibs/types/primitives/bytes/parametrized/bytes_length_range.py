@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import has_length
 
 
@@ -22,4 +22,4 @@ def bytes_length_range(min_length: int, max_length: int) -> Any:
         @validate_call
         def process(value: TokenBytes): ...
     """
-    return validated_type(bytes, has_length(min_length=min_length, max_length=max_length))
+    return Annotated[bytes, has_length(min_length=min_length, max_length=max_length)]

@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_odd
 
 
-int_odd = validated_type(int, is_odd)
+int_odd = Annotated[int, is_odd]
 """Validated type for an odd integer.
 
 Init Params:

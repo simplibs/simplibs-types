@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_whitespace
 
 
-str_whitespace = validated_type(str, is_whitespace)
+str_whitespace = Annotated[str, is_whitespace]
 """Validated type for a string consisting entirely of whitespace
 characters.
 

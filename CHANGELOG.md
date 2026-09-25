@@ -7,6 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.2.0] - 2026-09-25
+
+### 🔄 Changed
+
+#### Refactoring type definitions to standard `Annotated`
+
+* **Native Static Typing**: All parameterless preset types were refactored
+  from `validated_type(...)` calls to native `typing.Annotated[...]` constructs.
+  IDEs and static type checkers (PyCharm, Mypy, Pyright) now natively recognize
+  these aliases as valid types for autocomplete and type hinting without warnings.
+* **Redundant Type Validation Removal**: Simplified metadata rules in `Annotated`
+  definitions. The validation engine (`simplibs-validate`) automatically
+  inspects the target type argument of `Annotated[T, ...]` and prepends an
+  implicit `IsInstance(T)` check. Consequently, metadata rules no longer need
+  to re-verify the underlying base type, avoiding duplicate checks.
+
+#### Dependencies
+
+* **Lightweight Production Runtime**: Removed `simplibs-validate` and
+  `simplibs-exception` from runtime dependencies. The core library now strictly
+  depends only on `simplibs-rules`, drastically reducing package weight and
+  footprint.
+* `simplibs-validate` has been moved to `dev` dependencies solely to support
+  the test suite (`pytest`).
+
+### 📋 Improved
+
+#### Parameterized Types Usage & Hints
+
+* Parameterized type factories (functions returning `Annotated[T, ...]`) now
+  use standard `Annotated` return types.
+* *Note on Type Checker Behavior*: Assigning the return value of a function to
+  a variable (e.g., `Triplet = tuple_length(3)`) and using it directly as a
+  type annotation in signature definitions can trigger static type analyzer
+  warnings (`Invalid type annotation`).
+  * To circumvent this in user projects, you can either suppress the warning
+    via `# type: ignore[valid-type]`, use the function call directly inside
+    the annotation `@validate_call def process(x: tuple_length(3)): ...`, or
+    wrap it into a secondary native `Annotated` alias (e.g., `Triplet =
+    Annotated[tuple, has_length(3)]`).
+  * The `simplibs-validate` engine seamlessly unrolls and resolves nested
+    `Annotated` metadata structures at runtime.
+
+---
+
 ## [0.1.0] - 2026-09-24
 
 ### ✨ Added

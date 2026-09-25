@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-int_hour = validated_type(int, in_range(0, 23))
+int_hour = Annotated[int, in_range(0, 23)]
 """Validated type for an integer representing an hour (24-hour clock).
 
 Init Params:

@@ -1,5 +1,5 @@
-from typing import Any
-from simplibs.validate import validated_type
+from typing import Any, Annotated, Callable
+from typing import Annotated
 from simplibs.rules import has_length
 
 
@@ -19,4 +19,4 @@ def tuple_length(exact: int) -> Any:
         @validate_call
         def process(items: TripletTuple): ...
     """
-    return validated_type(tuple, has_length(exact))
+    return Annotated[tuple, has_length(exact)]

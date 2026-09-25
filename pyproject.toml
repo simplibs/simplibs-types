@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "simplibs-types"
-version = "0.1.0"
+version = "0.2.0"
 description = "Named, reusable validated types — ready-made presets built on simplibs-rules."
 readme = "README.md"
 license = "MIT"
@@ -32,8 +32,6 @@ classifiers = [
 ]
 dependencies = [
     "simplibs-rules>=0.2.2",
-    "simplibs-exception>=1.1.3",
-    "simplibs-validate>=0.2.1",
 ]
 
 [[project.authors]]
@@ -49,6 +47,7 @@ Changelog = "https://github.com/simplibs/simplibs-types/blob/main/CHANGELOG.md"
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
+    "simplibs-validate>=0.2.1",
 ]
 
 [tool.pytest.ini_options]

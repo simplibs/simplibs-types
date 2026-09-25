@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import has_length
 
 
@@ -20,4 +20,4 @@ def bytes_min_length(min_length: int) -> Any:
         @validate_call
         def process(value: NonTrivialBytes): ...
     """
-    return validated_type(bytes, has_length(min_length=min_length))
+    return Annotated[bytes, has_length(min_length=min_length)]

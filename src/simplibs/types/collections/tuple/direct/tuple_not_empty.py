@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import not_empty
 
 
-tuple_not_empty = validated_type(tuple, not_empty)
+tuple_not_empty = Annotated[tuple, not_empty]
 """Validated type for a non-empty tuple.
 
 Init Params:

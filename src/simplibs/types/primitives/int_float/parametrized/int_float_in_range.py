@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 def int_float_in_range(min_val: Any, max_val: Any) -> Any:
@@ -20,4 +20,4 @@ def int_float_in_range(min_val: Any, max_val: Any) -> Any:
         @validate_call
         def process(value: ScoreRange): ...
     """
-    return validated_type(int | float, in_range(min_val, max_val))
+    return Annotated[int | float, in_range(min_val, max_val)]

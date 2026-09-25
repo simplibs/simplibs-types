@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_slug = validated_type(str, regex(r"^[a-z0-9]+(?:-[a-z0-9]+)*$"))
+str_slug = Annotated[str, regex(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")]
 """Validated type for a URL-friendly slug string.
 
 Init Params:

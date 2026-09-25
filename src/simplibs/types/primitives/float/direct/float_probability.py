@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-float_probability = validated_type(float, in_range(0.0, 1.0))
+float_probability = Annotated[float, in_range(0.0, 1.0)]
 """Validated type for a float representing a probability.
 
 Init Params:

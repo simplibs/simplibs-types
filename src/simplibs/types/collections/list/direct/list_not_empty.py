@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import not_empty
 
 
-list_not_empty = validated_type(list, not_empty)
+list_not_empty = Annotated[list, not_empty]
 """Validated type for a non-empty list.
 
 Init Params:

@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import has_length
 
 
@@ -20,4 +20,4 @@ def dict_min_length(min_length: int) -> Any:
         @validate_call
         def process(data: NonTrivialDict): ...
     """
-    return validated_type(dict, has_length(min_length=min_length))
+    return Annotated[dict, has_length(min_length=min_length)]

@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import greater_than
 
 
@@ -19,4 +19,4 @@ def int_gt(threshold: int) -> Any:
         @validate_call
         def process(value: AboveZero): ...
     """
-    return validated_type(int, greater_than(threshold))
+    return Annotated[int, greater_than(threshold)]

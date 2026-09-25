@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_empty
 
 
-str_empty = validated_type(str, is_empty)
+str_empty = Annotated[str, is_empty]
 """Validated type for an empty string.
 
 Init Params:

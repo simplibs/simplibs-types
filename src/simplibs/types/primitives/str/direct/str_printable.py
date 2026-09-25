@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_printable
 
 
-str_printable = validated_type(str, is_printable)
+str_printable = Annotated[str, is_printable]
 """Validated type for a string consisting entirely of printable
 characters.
 

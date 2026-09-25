@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_ascii
 
 
-str_ascii = validated_type(str, is_ascii)
+str_ascii = Annotated[str, is_ascii]
 """Validated type for a string consisting entirely of ASCII characters.
 
 Init Params:

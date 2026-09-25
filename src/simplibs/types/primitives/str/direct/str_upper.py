@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_uppercase
 
 
-str_upper = validated_type(str, is_uppercase)
+str_upper = Annotated[str, is_uppercase]
 """Validated type for a string that is entirely uppercase.
 
 Init Params:

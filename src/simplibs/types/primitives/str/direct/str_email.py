@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_email = validated_type(str, regex(r"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+str_email = Annotated[str, regex(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
 """Validated type for a string matching a basic email address shape.
 
 Init Params:

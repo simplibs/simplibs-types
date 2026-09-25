@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-int_uint8 = validated_type(int, in_range(0, 255))
+int_uint8 = Annotated[int, in_range(0, 255)]
 """Validated type for an integer in the unsigned 8-bit range.
 
 Init Params:

@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_titlecase
 
 
-str_title = validated_type(str, is_titlecase)
+str_title = Annotated[str, is_titlecase]
 """Validated type for a string in title case.
 
 Init Params:

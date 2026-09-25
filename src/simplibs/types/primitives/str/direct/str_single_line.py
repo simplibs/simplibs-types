@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_single_line = validated_type(str, regex(r"^[^\n\r]*$"))
+str_single_line = Annotated[str, regex(r"^[^\n\r]*$")]
 """Validated type for a single-line string (no line breaks).
 
 Init Params:

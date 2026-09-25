@@ -5,16 +5,12 @@
 [![Licence](https://img.shields.io/badge/licence-MIT-green)](https://github.com/simplibs/simplibs-types/blob/main/LICENSE)
 
 **Named, reusable validated types — a pure type-definition library, built on
-[`simplibs-rules`](https://pypi.org/project/simplibs-rules/) and depending on
-[`simplibs-validate`](https://pypi.org/project/simplibs-validate/) for the
-`validated_type()` builder itself.**
+[`simplibs-rules`](https://pypi.org/project/simplibs-rules/).**
 
-A `Rule` from `simplibs-rules` answers "does this value satisfy me?". `simplibs-validate`
-provides the `validated_type()` helper, which names a `type_ + rule(s)` combination once,
-as an ordinary `Annotated` type. `simplibs-types` is built exclusively on top of that: it's
-a catalog of ready-made, documented, composed types for the constraints that come up again
-and again — instead of repeating `Annotated[int, greater_than(0)]` by hand at every call
-site.
+A `Rule` from `simplibs-rules` answers "does this value satisfy me?". `simplibs-types`
+provides a catalog of ready-made, documented, composed `Annotated` types for constraints
+that come up again and again — instead of repeating `Annotated[int, greater_than(0)]`
+by hand at every call site.
 
 ```python
 from simplibs.types import int_positive, str_email
@@ -39,25 +35,14 @@ need to open a browser tab just to remember what `int_uint8` means.
 comes straight from [`simplibs-rules`](https://pypi.org/project/simplibs-rules/). What
 it adds is *naming*: a library of ready-made, documented, composed types for the
 constraints that come up again and again (`int_positive`, `dict_not_empty`,
-`str_email`, ...), all of them built on top of `validated_type()` — the single helper
-that lives in [`simplibs-validate`](https://pypi.org/project/simplibs-validate/) and
-that any custom type you define yourself is built on top of, too.
+`str_email`, ...).
 
-```python
-from simplibs.validate import validated_type
-from simplibs.rules import greater_than
-
-PositiveInt = validated_type(int, greater_than(0))
-```
-
-This is deliberately *not* a new validation mechanism: `validated_type()` just builds
-`Annotated[type_, *rules]`, and the actual checking still happens where it always did —
-inside `simplibs-rules`' decomposition engine, invoked by `simplibs-validate`'s
-`validate_call`/`validate_dataclass`. `simplibs-types` itself is purely a catalog of
-named type definitions on top of both — it ships no validation logic and no
-`validated_type()` implementation of its own; that lives in
-[`simplibs-validate`](https://pypi.org/project/simplibs-validate/), which is why
-`simplibs-types` now depends on it directly.
+This is deliberately *not* a new validation mechanism: presets are built directly on top
+of standard `Annotated[type_, *rules]`, and the actual checking happens inside
+`simplibs-rules`' decomposition engine when invoked by runtime validators such as
+`simplibs-validate`'s `validate_call`/`validate_dataclass`. `simplibs-types` itself is
+purely a catalog of named type definitions — it ships no validation logic of its own
+and depends solely on [`simplibs-rules`](https://pypi.org/project/simplibs-rules/).
 
 ---
 
@@ -67,11 +52,9 @@ named type definitions on top of both — it ships no validation logic and no
 pip install simplibs-types
 ```
 
-`simplibs-rules` and [`simplibs-validate`](https://pypi.org/project/simplibs-validate/)
-are both installed automatically as dependencies — `simplibs-validate` provides the
-`validated_type()` builder that every type in this catalog is built on, and its
-`validate_call`/`validate_dataclass` decorators are what actually enforces the types at
-runtime.
+[`simplibs-rules`](https://pypi.org/project/simplibs-rules/) is installed automatically
+as a dependency. Runtime validation decorators like `validate_call` or `validate_dataclass`
+can be used via [`simplibs-validate`](https://pypi.org/project/simplibs-validate/).
 
 ---
 
@@ -109,10 +92,10 @@ def create_account(username: Username) -> None:
 ### Level 3: Define your own named type
 
 ```python
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_string, contains
 
-CompanyEmail = validated_type(str, is_string, contains("@simplibs.dev"))
+CompanyEmail = Annotated[str, is_string & contains("@simplibs.dev")]
 
 @validate_call
 def notify(email: CompanyEmail) -> None:
@@ -121,59 +104,40 @@ def notify(email: CompanyEmail) -> None:
 
 ---
 
-## 🧩 `validated_type` — the helper every type is built on
+## ⚠️ Type Checkers & Parameterized Types
 
-> `validated_type()` lives in [`simplibs-validate`](https://pypi.org/project/simplibs-validate/),
-> not in this library. `simplibs-types` is installed on top of it — every preset in the
-> catalog below is `validated_type()` under the hood, imported from `simplibs.validate`.
+All presets in `simplibs-types` are standard `typing.Annotated` constructs under the hood.
 
-```python
-from simplibs.validate import validated_type
+* **Parameterless types** (e.g., `int_positive`, `str_email`): Work seamlessly with static
+  type checkers like Mypy or Pyright without any extra configuration.
+* **Parameterized factory types** (e.g., `int_gt(0)`, `str_length_range(3, 20)`): Since they
+  are generated dynamically at runtime via factory functions, static type checkers may report an issue such as:
+  > `Invalid type annotation`
 
+This is a **false positive** static analysis warning because dynamic `Annotated` instances returned by functions are evaluated at runtime, whereas static checkers expect static typing aliases.
 
-def validated_type(
-    type_: Any,
-    *rules: Rule | Callable[[Any], bool],
-) -> Any:
-    ...
-```
+### How to handle false positive warnings
 
-`validated_type()` is a thin, named wrapper around `Annotated[type_, *rules]`. It
-performs no validation itself — it builds the annotation immediately and returns it;
-actual decomposition happens later, whenever `build_typing_rule` (via `IsTyping`,
-`validate_call`, or `validate_dataclass`) processes it. The only work it does up front
-is fail fast: it requires at least one rule, and checks that every rule given is either
-a `Rule` instance or a plain callable, naming the exact offending argument if not.
-
-**Parameters**
-
-* `type_` (*Any*) — the underlying type or typing construct (`int`, `list[int]`,
-  `int | None`, ...) — anything `build_typing_rule` already accepts.
-* `*rules` (*Rule | Callable[[Any], bool]*) — one or more `Rule` instances or plain
-  callable predicates. At least one is required. Multiple rules may be given either as
-  separate positional arguments or pre-composed via `|`/`&`/`~` — both produce the same
-  final `Rule` once decomposed, and the two styles can be freely mixed:
+1. **Ignore or suppress the warning:** You can add `# type: ignore` to line-level annotations.
+2. **Re-wrap with `Annotated` (Recommended for clean static checking):**
+   Wrap the parameterized factory result in `Annotated` once more on your side. The validation system automatically unpacks nested annotations:
 
 ```python
-PositiveInt = validated_type(int, greater_than(0))
-PositiveInt = validated_type(int, is_integer, greater_than(0))
-PositiveInt = validated_type(int, is_integer & greater_than(0))
+from typing import Annotated
+from simplibs.types import str_length_range
+
+# Avoids static type checker errors while preserving full runtime validation
+Username = Annotated[str, str_length_range(3, 20)]
 ```
-
-**Returns:** `Annotated[type_, *rules]` — an ordinary typing construct, usable directly
-as a parameter, field, or variable annotation.
-
-**Raises:** `ParamError` if no rules are given, or if any rule is neither a `Rule`
-instance nor callable.
 
 ---
 
 ## 📖 Preset Catalog
 
-Every preset below is a thin wrapper around `validated_type(type_, *rules)`, fully
-documented on hover. Parameterless presets (`int_positive`, `dict_not_empty`, ...) are
-ready-made `Annotated` constants; parameterized ones (`int_gt`, `str_length_range`, ...)
-are factory functions that build a fresh `Annotated` construct per call.
+Every preset below is built on `Annotated[type_, *rules]` and fully documented on hover.
+Parameterless presets (`int_positive`, `dict_not_empty`, ...) are ready-made `Annotated`
+constants; parameterized ones (`int_gt`, `str_length_range`, ...) are factory functions
+that build a fresh `Annotated` construct per call.
 
 ### 1. Collections
 
@@ -349,10 +313,9 @@ jump to the definition.
 * **[`simplibs-rules`](https://pypi.org/project/simplibs-rules/)** — the `Rule` base
   class and every predicate (`is_integer`, `greater_than`, `contains`, ...) that
   presets here are composed from.
-* **[`simplibs-validate`](https://pypi.org/project/simplibs-validate/)** — hosts
-  `validated_type()` itself, plus `validate()`, `validate_call`, and
-  `validate_dataclass`, which is how types from this library actually get enforced.
-  `simplibs-types` depends directly on it.
+* **[`simplibs-validate`](https://pypi.org/project/simplibs-validate/)** — provides
+  runtime execution helpers (`validate()`, `validate_call`, `validate_dataclass`) to
+  enforce these types in functions or dataclasses at runtime.
 
 ---
 

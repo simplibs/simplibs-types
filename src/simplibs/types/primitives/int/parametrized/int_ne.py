@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import not_equals
 
 
@@ -19,4 +19,4 @@ def int_ne(forbidden: int) -> Any:
         @validate_call
         def process(value: NotThirteen): ...
     """
-    return validated_type(int, not_equals(forbidden))
+    return Annotated[int, not_equals(forbidden)]

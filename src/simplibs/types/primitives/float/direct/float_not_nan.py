@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import negate, is_nan
 
 
-float_not_nan = validated_type(float, negate(is_nan))
+float_not_nan = Annotated[float, negate(is_nan)]
 """Validated type for a float that is not NaN.
 
 Init Params:

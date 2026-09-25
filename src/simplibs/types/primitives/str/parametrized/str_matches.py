@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
@@ -20,4 +20,4 @@ def str_matches(pattern: str) -> Any:
         @validate_call
         def process(value: DigitsOnly): ...
     """
-    return validated_type(str, regex(pattern))
+    return Annotated[str, regex(pattern)]

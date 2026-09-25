@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_lowercase
 
 
-str_lower = validated_type(str, is_lowercase)
+str_lower = Annotated[str, is_lowercase]
 """Validated type for a string that is entirely lowercase.
 
 Init Params:

@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_hex_color = validated_type(str, regex(r"^#[0-9a-fA-F]{6}$"))
+str_hex_color = Annotated[str, regex(r"^#[0-9a-fA-F]{6}$")]
 """Validated type for a string in 6-digit hex color format.
 
 Init Params:

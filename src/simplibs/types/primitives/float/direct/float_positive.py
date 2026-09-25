@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import greater_than
 
 
-float_positive = validated_type(float, greater_than(0.0))
+float_positive = Annotated[float, greater_than(0.0)]
 """Validated type for a positive float (strictly greater than zero).
 
 Init Params:

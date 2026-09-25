@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_no_whitespace = validated_type(str, regex(r"^\S*$"))
+str_no_whitespace = Annotated[str, regex(r"^\S*$")]
 """Validated type for a string containing no whitespace characters at all.
 
 Init Params:

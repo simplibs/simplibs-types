@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_true
 
 
-bool_true = validated_type(bool, is_true)
+bool_true = Annotated[bool, is_true]
 """Validated type for a boolean that must be True.
 
 Init Params:

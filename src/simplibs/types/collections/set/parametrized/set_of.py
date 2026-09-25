@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import for_each
 
 
@@ -28,4 +28,4 @@ def set_of(item_rule: Any) -> Any:
         @validate_call
         def register(scores: PositiveIntSet): ...
     """
-    return validated_type(set, for_each(item_rule))
+    return Annotated[set, for_each(item_rule)]

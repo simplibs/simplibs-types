@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_snake_case = validated_type(str, regex(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$"))
+str_snake_case = Annotated[str, regex(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")]
 """Validated type for a snake_case string.
 
 Init Params:

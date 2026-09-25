@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import negate, is_infinity
 
 
-float_not_infinite = validated_type(float, negate(is_infinity))
+float_not_infinite = Annotated[float, negate(is_infinity)]
 """Validated type for a float that is not +/-infinity.
 
 Init Params:

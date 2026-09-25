@@ -1,5 +1,5 @@
 from typing import Any
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import divisible_by
 
 
@@ -19,4 +19,4 @@ def int_divisible_by(divisor: int) -> Any:
         @validate_call
         def process(value: MultipleOfFive): ...
     """
-    return validated_type(int, divisible_by(divisor))
+    return Annotated[int, divisible_by(divisor)]

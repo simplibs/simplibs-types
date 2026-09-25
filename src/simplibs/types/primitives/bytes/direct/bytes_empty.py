@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_empty
 
 
-bytes_empty = validated_type(bytes, is_empty)
+bytes_empty = Annotated[bytes, is_empty]
 """Validated type for empty bytes.
 
 Init Params:

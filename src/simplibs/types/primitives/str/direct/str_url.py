@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import regex
 
 
-str_url = validated_type(str, regex(r"^https?://[^\s]+$"))
+str_url = Annotated[str, regex(r"^https?://[^\s]+$")]
 """Validated type for a string matching a basic HTTP(S) URL shape.
 
 Init Params:

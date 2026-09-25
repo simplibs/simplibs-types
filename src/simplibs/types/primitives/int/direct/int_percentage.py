@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-int_percentage = validated_type(int, in_range(0, 100))
+int_percentage = Annotated[int, in_range(0, 100)]
 """Validated type for an integer representing a percentage.
 
 Init Params:

@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import in_range
 
 
-int_year = validated_type(int, in_range(1, 9999))
+int_year = Annotated[int, in_range(1, 9999)]
 """Validated type for an integer representing a calendar year.
 
 Init Params:

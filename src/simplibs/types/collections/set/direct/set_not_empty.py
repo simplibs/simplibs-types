@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import not_empty
 
 
-set_not_empty = validated_type(set, not_empty)
+set_not_empty = Annotated[set, not_empty]
 """Validated type for a non-empty set.
 
 Init Params:

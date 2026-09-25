@@ -1,8 +1,8 @@
-from simplibs.validate import validated_type
+from typing import Annotated
 from simplibs.rules import is_alpha
 
 
-str_alpha = validated_type(str, is_alpha)
+str_alpha = Annotated[str, is_alpha]
 """Validated type for a string consisting entirely of alphabetic
 characters.
 
